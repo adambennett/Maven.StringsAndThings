@@ -1,6 +1,8 @@
 package io.zipcoder;
 
 
+import java.util.ArrayList;
+
 /**
  * @author tariq
  */
@@ -15,7 +17,26 @@ public class StringsAndThings {
      *           countYZ("day fyyyz"); // Should return 2
      */
     public Integer countYZ(String input){
-        return null;
+        String[] splitted = input.split(" ");
+        int amt = 0;
+        char y = 'Y';
+        char x = 'Z';
+        char yL = 'y';
+        char xL = 'z';
+        ArrayList<Character> countChars = new ArrayList<>();
+        countChars.add(x); countChars.add(y);
+        countChars.add(xL); countChars.add(yL);
+        for (String s : splitted) {
+            for (char cha : countChars) {
+                if (s.charAt(s.length() - 1) == cha) {
+                    amt++;
+                    System.out.println(s.charAt(s.length() - 1));
+                    break;
+                }
+            }
+        }
+
+        return amt;
     }
 
     /**
@@ -28,7 +49,8 @@ public class StringsAndThings {
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
     public String removeString(String base, String remove){
-        return null;
+        String toRet = base.replace(remove, "");
+        return toRet;
     }
 
     /**
@@ -40,7 +62,32 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input){
-        return null;
+        int isAmt = 0;
+        int notAmt = 0;
+        for (String s : input.split(" ")) {
+            char[] arr = s.toCharArray();
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] == 'i') {
+                    if (i + 1 < arr.length && i + 1 >= 0) {
+                        if (arr[i + 1] == 's') {
+                            isAmt++;
+                        }
+                    }
+                }
+
+                else if (arr[i] == 'n') {
+                    if (i + 1 < arr.length && i + 1 >= 0) {
+                        if (arr[i + 1] == 'o' && i + 2 < arr.length) {
+                            if (arr[i + 2] == 't') {
+                                notAmt++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return isAmt == notAmt;
     }
 
     /**
@@ -51,7 +98,22 @@ public class StringsAndThings {
      *           gHappy("xxggyygxx") // Should return  false
      */
     public Boolean gIsHappy(String input){
-        return null;
+        char[] arr = input.toCharArray();
+        boolean allHappyG = false;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 'g') {
+                if (i - 1 >= 0 && arr[i-1] == 'g') {
+                    allHappyG = true;
+                }
+                else if (i + 1 < arr.length && arr[i + 1] == 'g') {
+                    allHappyG = true;
+                }
+                else {
+                    allHappyG = false;
+                }
+            }
+        }
+        return allHappyG;
     }
 
 
@@ -63,6 +125,17 @@ public class StringsAndThings {
      *            countTriple("a") // Should return 0
      */
     public Integer countTriple(String input){
-        return null;
+        int triples = 0;
+
+        char[] arr = input.toCharArray();
+        char lastChar = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (i - 1 >= 0 && i - 1 < arr.length && i < arr.length) {
+                if (arr[i - 1] == arr[i] && arr[i] == arr[i+1]) {
+                    triples++;
+                }
+            }
+        }
+        return triples;
     }
 }
